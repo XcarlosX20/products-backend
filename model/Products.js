@@ -9,7 +9,7 @@ const ProductsSchema = mongoose.Schema({
     type: Number,
     default: false,
   },
-  companie: {
+  company: {
     type: mongoose.Types.ObjectId,
     ref: 'Companies',
   },
@@ -19,7 +19,7 @@ const ProductsSchema = mongoose.Schema({
   },
   img: {
     type: String,
-    require: true,
+    require: false,
     trim: true,
   },
   description: {

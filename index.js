@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api/products', require('./routes/products'))
 app.use('/api/companies', require('./routes/companies'))
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api/requests', require('./routes/requests'))
 app.listen(PORT, () => {
   console.log('listen on port ' + PORT)
 })
