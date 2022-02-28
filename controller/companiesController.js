@@ -1,9 +1,9 @@
 const Companie = require('../model/Companies')
 const bcrypt = require('bcrypt')
 exports.addCompany = async (req, res) => {
-  const { companieName, password } = req.body
+  const { companyEmail, password } = req.body
 
-  let company = await Companie.findOne({ companieName })
+  let company = await Companie.findOne({ companyEmail })
   if (company) {
     res.status(400).json({ msg: 'This user already exists' })
   } else {

@@ -2,9 +2,9 @@ const Companies = require('../model/Companies')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 exports.authCompany = async (req, res) => {
-  const { companieName, password } = req.body
+  const { companyEmail, password } = req.body
   try {
-    let company = await Companies.findOne({ companieName })
+    let company = await Companies.findOne({ companyEmail })
     if (!company) {
       return res.status(400).json({ msg: 'This user does not exist' })
     }
@@ -12,6 +12,7 @@ exports.authCompany = async (req, res) => {
     if (!passCorrect) {
       return res.status(400).json({ msg: 'Password Incorrect' })
     }
+    console.log(company)
     //JWT
     const payload = {
       company: {
@@ -36,7 +37,7 @@ exports.authCompany = async (req, res) => {
 exports.getCompany = async (req, res) => {
   try {
     const user = await Companies.findById(req.company.id).select('-password');
-    res.json({user});
+    res.status(200).json(user);
 } catch (error) {
     console.log(error);
     res.status(500).json({msg: 'There was an error'});
