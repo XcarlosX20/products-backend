@@ -12,7 +12,6 @@ exports.authCompany = async (req, res) => {
     if (!passCorrect) {
       return res.status(400).json({ msg: 'Password Incorrect' })
     }
-    console.log(company)
     //JWT
     const payload = {
       company: {
