@@ -8,3 +8,5 @@ router.post('/',  auth, productsController.addProducts)
 router.put('/:idProduct',  auth, productsController.editProducts)
 router.delete('/:idProduct', auth, productsController.deleteProducts)
 module.exports = router
+//ecommerce
+router.get('/:idCompany/:category',  productsController.getProductsEcommerce)

@@ -24,3 +24,8 @@ exports.deleteProducts = async (req, res) => {
   await Products.findByIdAndDelete(idProduct)
   res.send('deleted')
 }
+exports.getProductsEcommerce = async(req, res) => {
+  const { idCompany, category } = req.params
+   const products = await Products.find({idCompany})
+   res.json(products.filter(product => product.category === category))
+}

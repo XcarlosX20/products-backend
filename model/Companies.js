@@ -24,6 +24,10 @@ const CompaniesSchema = mongoose.Schema(
       type: String,
       require: false,
     },
+    categories: {
+      type: Array,
+      require: false
+    }
   },
   { versionKey: false }
 )

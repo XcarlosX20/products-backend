@@ -27,6 +27,10 @@ const ProductsSchema = mongoose.Schema(
       type: String,
       require: false,
     },
+    category: {
+      type: String,
+      require: false
+    }
   },
   { versionKey: false }
 )
