@@ -13,13 +13,12 @@ const io = socketIo(server, {
   }
 });
 connectDB()
+const socketClient = require('./socket')
 const PORT = process.env.PORT || 4000
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 // routes
-app.set('port', process.env.POR || 4000)
-
 app.use('/api/products', require('./routes/products'))
 app.use('/api/companies', require('./routes/companies'))
 app.use('/api/auth', require('./routes/auth'))
@@ -32,6 +31,6 @@ io.on('connection', socket => {
   });
 })
 
-server.listen(app.get('port'), () => {
-  console.log(`server on port ${app.get('port')}`);
+server.listen( PORT, () => {
+  console.log(`server on port ${PORT}`);
 });

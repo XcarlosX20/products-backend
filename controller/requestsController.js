@@ -1,6 +1,5 @@
 const Companies = require('../model/Companies')
 const Requests = require('../model/Requests')
-
 exports.getRequest = async (req, res) => {
   const company  = req.company.id
   try {
@@ -17,7 +16,7 @@ exports.addRequest = async (req, res) => {
     request.company = req.params.idCompany;
     const newOrder = new Requests(request);
     await newOrder.save()
-    res.send('send')
+    res.status(203).send('send')
   }else{
     res.status(404).json({msg: 'company not found'})
   }

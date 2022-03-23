@@ -1,5 +1,5 @@
 const Products = require('../model/Products')
-const connectDBAuth = require('../config/dbAuth')
+//const connectDBAuth = require('../config/dbAuth')
 exports.getProducts = async (req, res) => {
   // pasar el id de cada company
   const company  = req.company.id;
