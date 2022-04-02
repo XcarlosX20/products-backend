@@ -1,3 +1,4 @@
+const { decreaseDaysToDate } = require('../helpers')
 const Companies = require('../model/Companies')
 const Requests = require('../model/Requests')
 
@@ -27,5 +28,19 @@ exports.editRequest = async (req, res) => {
   const {id} = req.params
   const request = await Requests.findByIdAndUpdate(id, req.body)
   res.status(200).json(request)
-  
+}
+exports.getRequestInDays = async (req, res) => {
+  const company = req.company.id
+  const {daysRange} = req.params
+  const timeAgo = (decreaseDaysToDate({days: daysRange}))
+  try {
+    const requests = await Requests.find({ company }).sort({ date: -1 })
+    const filterByMonthAgo = () => {
+        return requests.filter((results) => (results.date > timeAgo ))
+    }
+    const requestLastMonth = filterByMonthAgo();
+    res.status(200).json({ requestLastMonth })
+  } catch (error) {
+    console.log(error)
+  }
 }

@@ -15,8 +15,7 @@ app.use('/api/products', require('./routes/products'))
 app.use('/api/companies', require('./routes/companies'))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/requests', require('./routes/requests'))
-
-
+app.use('/api/summary', require('./routes/summary'))
 app.listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
