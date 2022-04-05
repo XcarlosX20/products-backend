@@ -1,11 +1,11 @@
-const { decreaseDaysToDate } = require('../helpers')
+const { getDateRange } = require('../helpers')
 const Companies = require('../model/Companies')
 const Requests = require('../model/Requests')
 
 exports.getRequest = async (req, res) => {
   const company  = req.company.id
   try {
-    const orders = await Requests.find({company}).sort({date: -1})
+    const orders = await Requests.find({company}).sort({state: 1, date: -1})
     res.status(200).json(orders)
   } catch (error) {
     console.log(error)
@@ -32,11 +32,12 @@ exports.editRequest = async (req, res) => {
 exports.getRequestInDays = async (req, res) => {
   const company = req.company.id
   const {daysRange} = req.params
-  const timeAgo = (decreaseDaysToDate({days: daysRange}))
   try {
+    const {dateRef} = await Companies.findById(company);
     const requests = await Requests.find({ company }).sort({ date: -1 })
+    const timeLimit = getDateRange({dateRef, days: daysRange})
     const filterByMonthAgo = () => {
-        return requests.filter((results) => (results.date > timeAgo ))
+        return requests.filter((results) => ( results.date < timeLimit  ))
     }
     const requestLastMonth = filterByMonthAgo();
     res.status(200).json({ requestLastMonth })

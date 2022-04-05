@@ -1,7 +1,8 @@
-exports.decreaseDaysToDate = ({anyDate, days}) => {
-    let date = anyDate || Date.now()
+exports.getDateRange = ({dateRef, days}) => {
+    let date = dateRef || Date.now()
     let res = new Date(date)
-    res.setDate(res.getDate() - days)
+    res.setDate(res.getDate() + Number(days))
+    console.log(dateRef, res)
     return res
   }
 exports.calculeRevenues = ({arr}) => {

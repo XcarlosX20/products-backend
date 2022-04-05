@@ -27,6 +27,10 @@ const CompaniesSchema = mongoose.Schema(
     categories: {
       type: Array,
       require: false
+    },
+    dateRef: {
+      type: Date,
+      default: Date.now()
     }
   },
   { versionKey: false }

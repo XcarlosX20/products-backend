@@ -37,7 +37,7 @@ const RequestsSchema = mongoose.Schema(
     },
     date:{
       type: Date,
-      default: Date.now()
+      require: true
     },
     company: {
       type: mongoose.Types.ObjectId,
