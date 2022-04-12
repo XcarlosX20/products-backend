@@ -1,11 +1,11 @@
 const Products = require('../model/Products')
-const connectDBAuth = require('../config/dbAuth')
+const { productsAlphabet } = require('../helpers');
 exports.getProducts = async (req, res) => {
   // pasar el id de cada company
   const company  = req.company.id;
-   const product = await Products.find({company})
-   res.json(product)
-   //connectDBAuth(req.company.db)
+   const findProduct = await Products.find({company})
+   const products = productsAlphabet(findProduct)
+   res.json(products)
 }
 exports.addProducts = async (req, res) => {
   // pasar el id de cada company

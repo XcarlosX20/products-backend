@@ -37,7 +37,7 @@ exports.getRequestInDays = async (req, res) => {
     const requests = await Requests.find({ company }).sort({ date: -1 })
     const timeLimit = getDateRange({dateRef, days: daysRange})
     const filterByMonthAgo = () => {
-        return requests.filter((results) => ( results.date < timeLimit  ))
+        return requests.filter((results) => ( results.date >= timeLimit  ))
     }
     const requestLastMonth = filterByMonthAgo();
     res.status(200).json({ requestLastMonth })

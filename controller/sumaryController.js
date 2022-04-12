@@ -10,7 +10,7 @@ exports.getSumaryCompany = async (req, res) => {
     const timeLimit = getDateRange({ days: daysRange, dateRef })
     if (daysRange) {
       const filterByMonthAgo = () => {
-        return requests.filter((results) => results.date < timeLimit)
+        return requests.filter((results) => results.date >= timeLimit)
       }
       const requestLastMonth = filterByMonthAgo()
       const earnings = calculeRevenues({ arr: requestLastMonth })
