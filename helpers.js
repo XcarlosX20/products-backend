@@ -1,12 +1,5 @@
 const moment = require('moment')
 const format = 'Do MMMM YYYY'
-exports.getDateRange = ({ dateRef, days }) => {
-  //startDate and endDate
-  let date = dateRef
-  let res = new Date(date)
-  res.setDate(res.getDate() - Number(days || 30))
-  return res
-}
 exports.calculeRevenues = ({ arr }) => {
   let total = 0
   arr.forEach((element) => {
