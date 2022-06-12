@@ -1,5 +1,5 @@
 const moment = require('moment')
-const format = 'Do MMMM YYYY'
+const format = 'DD/MM/YYYY'
 exports.calculeRevenues = ({ arr }) => {
   let total = 0
   arr.forEach((element) => {
@@ -27,7 +27,7 @@ exports.changeDate = ({ dateRef }) => {
   let today = moment()
   let fechaLimite = moment(dateRef)
   let diff = today.clone().diff(fechaLimite, 'month')
-  if (today >= fechaLimite) {
+  if (today > fechaLimite) {
     let res = fechaLimite.add(1, 'month')
     if (diff > 0) {
       res = fechaLimite.add(diff, 'month')

@@ -6,6 +6,9 @@ const connectDB = require('./config/db')
 const nodemailer = require('nodemailer')
 const auth = require('./middleware/auth')
 const { changeDate } = require('./helpers')
+var delay = require('express-delay')
+
+//app.use(delay(500, 2000))
 connectDB()
 app.use(cors())
 app.use(express.json())
@@ -43,5 +46,5 @@ app.use('/api/summary', require('./routes/summary'))
 //   res.send('received')
 // });
 app.listen(app.get('port'), () => {
-  console.log(`server on port ${app.get('port')}`);
-});
+  console.log(`server on port ${app.get('port')}`)
+})
