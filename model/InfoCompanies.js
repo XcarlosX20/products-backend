@@ -1,0 +1,49 @@
+const mongoose = require('mongoose')
+const CompaniesSchema = mongoose.Schema(
+  {
+    company: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Companies',
+    },
+    description: {
+      type: String,
+      require: false,
+    },
+    categories: {
+      type: [String],
+      require: false,
+    },
+    workdays: {
+      type: [String],
+      default: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ],
+      require: true,
+    },
+    workTime: {
+      type: [String],
+      default: ['8:00', '21:00'],
+      require: true,
+    },
+    employees: [
+      {
+        name: String,
+        role: String,
+        socialMedia: {
+          instagram: String,
+          twitter: String,
+          facebook: String,
+          tiktok: String,
+        },
+      },
+    ],
+  },
+  { versionKey: false }
+)
+module.exports = mongoose.model('InfoCompanies', CompaniesSchema)
