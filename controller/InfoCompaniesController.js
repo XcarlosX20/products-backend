@@ -19,10 +19,23 @@ exports.addInfoCompany = async (req, res) => {
 }
 exports.getInfoCompany = async (req, res) => {
   const company = req.company.id
-  const infoCompany = await InfoCompanies.findOne({ company })
-  res.status(200).json(infoCompany)
+  try {
+    const infoCompany = await InfoCompanies.findOne({ company })
+    res.status(200).json(infoCompany)
+  } catch (error) {
+    console.log(error)
+  }
 }
 exports.editInfoCompany = async (req, res) => {
   const company = req.company.id
-  const editCompany = await InfoCompanies.findByIdAndUpdate(company, req.body)
+  try {
+    const editCompanyInfo = await InfoCompanies.findOneAndUpdate(
+      company,
+      req.body
+    )
+    if (!editCompanyInfo) res.status(404).json({ msg: 'there was an error' })
+    res.status(201).json({ msg: 'successfully upgraded' })
+  } catch (error) {
+    console.log(error)
+  }
 }

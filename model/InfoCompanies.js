@@ -28,7 +28,7 @@ const CompaniesSchema = mongoose.Schema(
     },
     workTime: {
       type: [String],
-      default: ['8:00', '21:00'],
+      default: ['08:00', '21:00'],
       require: true,
     },
     employees: [
