@@ -5,12 +5,16 @@ require('dotenv').config({ path: '.env' })
 const connectDB = require('./config/db')
 const nodemailer = require('nodemailer')
 const auth = require('./middleware/auth')
-const { changeDate } = require('./helpers')
-var delay = require('express-delay')
+//var delay = require('express-delay')
 
 //app.use(delay(500, 2000))
 connectDB()
-app.use(cors())
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+}
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 // routes
