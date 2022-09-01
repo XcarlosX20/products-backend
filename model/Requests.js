@@ -8,41 +8,41 @@ const RequestsSchema = mongoose.Schema(
     },
     amount: {
       type: Number,
-      require: true
+      require: true,
     },
     description: {
       type: String,
       require: false,
-      trim: true
+      trim: true,
     },
-    bag : {
+    bag: {
       type: Array,
-      require: true
+      require: true,
     },
-    number_proof_payment : {
+    number_proof_payment: {
       type: String,
-      require: true
+      require: true,
     },
-    img_proof_payment : {
+    img_proof_payment: {
       type: String,
-      require: true
+      require: true,
     },
-    state : {
+    state: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    pendingDelete:{
+    pendingDelete: {
       type: Boolean,
-      require: false
+      require: false,
     },
-    date:{
+    date: {
       type: Date,
-      require: true
+      require: true,
     },
     company: {
       type: mongoose.Types.ObjectId,
-      ref: 'Companies'
-    }
+      ref: 'Companies',
+    },
   },
   { versionKey: false }
 )

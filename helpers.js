@@ -1,10 +1,10 @@
-const moment = require('moment');
+const moment = require('moment')
 const format = 'Do MMMM YYYY'
 exports.getDateRange = ({ dateRef, days }) => {
+  //startDate and endDate
   let date = dateRef
   let res = new Date(date)
   res.setDate(res.getDate() - Number(days || 30))
-  console.log(dateRef, res)
   return res
 }
 exports.calculeRevenues = ({ arr }) => {
@@ -32,15 +32,15 @@ exports.productsAlphabet = (arr) => {
 }
 exports.changeDate = ({ dateRef }) => {
   let today = moment()
-  let fechaLimite = moment(dateRef);
-  let diff = today.clone().diff(fechaLimite, 'month');
-  if(today >= fechaLimite){
+  let fechaLimite = moment(dateRef)
+  let diff = today.clone().diff(fechaLimite, 'month')
+  if (today >= fechaLimite) {
     let res = fechaLimite.add(1, 'month')
-    if (diff > 0 ) {
-      let res = fechaLimite.add(diff, 'month')
-      return new Date(res)
+    if (diff > 0) {
+      res = fechaLimite.add(diff, 'month')
+      return { change: new Date(res), diff }
     }
-    return new Date(res)
+    return { change: new Date(res), diff }
   }
-  return false
+  return { change: false, diff }
 }

@@ -17,9 +17,9 @@ exports.addCompany = async (req, res) => {
 exports.editCompanyCategories = async (req, res) => {
   try {
     const company = req.company.id;
-    const setCompany = await Company.findByIdAndUpdate(company, {categories: req.body.categories}).select('-password')
+    const setCompany = await Company.findByIdAndUpdate(company, {categories: req.body.categories})
     if(setCompany){
-      res.status(200).json(setCompany)
+      res.status(202).json(setCompany)
     }
   } catch (error) {
     console.log(error)
