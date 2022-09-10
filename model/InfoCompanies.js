@@ -35,12 +35,7 @@ const CompaniesSchema = mongoose.Schema(
       {
         name: String,
         role: String,
-        socialMedia: {
-          instagram: String,
-          twitter: String,
-          facebook: String,
-          tiktok: String,
-        },
+        socialMedia: Object,
       },
     ],
   },

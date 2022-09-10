@@ -27,14 +27,18 @@ exports.getInfoCompany = async (req, res) => {
   }
 }
 exports.editInfoCompany = async (req, res) => {
+  //const { property } = req.params
   const company = req.company.id
+  const payload = req.body.data
+  const properties = Object.values(req.query)
   try {
-    const editCompanyInfo = await InfoCompanies.findOneAndUpdate(
-      company,
-      req.body
-    )
-    if (!editCompanyInfo) res.status(404).json({ msg: 'there was an error' })
+    const infoCompany = await InfoCompanies.findOne({ company })
+    properties.forEach((property) => {
+      infoCompany[property] = payload[property]
+    })
+    await infoCompany.save()
     res.status(201).json({ msg: 'successfully upgraded' })
+    //console.log(payload, properties)
   } catch (error) {
     console.log(error)
   }
