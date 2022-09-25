@@ -4,10 +4,11 @@ const app = express()
 require('dotenv').config({ path: '.env' })
 const connectDB = require('./config/db')
 const nodemailer = require('nodemailer')
-const auth = require('./middleware/auth')
-//var delay = require('express-delay')
+if (process.env.NODE_ENV !== 'production') {
+  var delay = require('express-delay')
 
-//app.use(delay(500, 2000))
+  app.use(delay(500, 2000))
+}
 connectDB()
 const corsOptions = {
   origin: '*',

@@ -7,11 +7,13 @@ const CompaniesSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      require: false,
+      require: true,
+      default: '',
     },
     categories: {
       type: [String],
-      require: false,
+      require: true,
+      default: [],
     },
     workdays: {
       type: [String],
