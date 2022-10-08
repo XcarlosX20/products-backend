@@ -12,15 +12,16 @@ exports.getRequest = async (req, res) => {
   }
 }
 exports.addRequest = async (req, res) => {
-  const company = await Companies.findById(req.params.idCompany)
-  if (company) {
+  try {
+    const company = await Companies.findById(req.params.idCompany)
     const request = req.body
-    request.company = req.params.idCompany
+    request.company = company._id
+    request.state = false
     const newOrder = new Requests(request)
     await newOrder.save()
     res.send('send')
-  } else {
-    res.status(404).json({ msg: 'company not found' })
+  } catch (error) {
+    console.log(error)
   }
 }
 exports.editRequest = async (req, res) => {

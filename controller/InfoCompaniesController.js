@@ -37,7 +37,6 @@ exports.getCategories = async (req, res) => {
       return res.status(404).json({ msg: 'not found' })
     }
     if (q === 'all') {
-      //console.log({ companyName: company.companyName, [q]: infoCompany[q] })
       return res
         .status(200)
         .json({ companyName: company.companyName, ...infoCompany._doc })

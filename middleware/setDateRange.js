@@ -9,7 +9,7 @@ const setDateRange = async (req, res, next) => {
   try {
     const company = req.company.id
     let companyData = await Companies.findById(company)
-    let { change, diff } = changeDate({ dateRef: companyData.dateRef })
+    let { change } = changeDate({ dateRef: companyData.dateRef })
     if (change) {
       const requests = await Requests.find({ company }).sort({ date: -1 })
       const startDate = new Date(
@@ -21,7 +21,7 @@ const setDateRange = async (req, res, next) => {
       const requestLastMonth = filterByMonthAgo()
       const amount = calculeRevenues({ arr: requestLastMonth })
       const data = {
-        startDate: new Date(moment(companyData.dateRef).subtract(1, 'month')),
+        startDate,
         endDate: companyData.dateRef,
         company,
         amount,
