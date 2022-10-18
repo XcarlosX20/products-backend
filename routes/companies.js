@@ -7,6 +7,11 @@ router.post('/', companiesController.addCompany)
 //router.post('/info', auth, InfoCompaniesController.addInfoCompany)
 router.put('/info/', auth, InfoCompaniesController.editInfoCompany)
 router.get('/info', auth, InfoCompaniesController.getInfoCompany)
+router.delete(
+  '/info/categories/:category',
+  auth,
+  InfoCompaniesController.deleteCategory
+)
 //Ecommerce
 router.get('/:idCompany', InfoCompaniesController.getCategories)
 module.exports = router
