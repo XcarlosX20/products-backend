@@ -51,7 +51,7 @@ exports.deleteCategory = async (req, res) => {
     //deleteCategoriesAtproducts
     const products = await Products.find({ company, category })
     products.forEach(async (i) => {
-      i.category = undefined
+      i.category = 'undefined'
       await i.save()
     })
     await infoCompany.save()
