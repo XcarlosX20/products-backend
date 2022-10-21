@@ -49,8 +49,8 @@ exports.deleteCategory = async (req, res) => {
     )
     //deleteCategoriesAtproducts
     const products = await Products.updateMany(
-      { company, category },
-      { category: 'undefined' }
+      { company, category: category },
+      { category: undefined }
     )
     console.log(products)
     await infoCompany.save()
