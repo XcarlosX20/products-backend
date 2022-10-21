@@ -14,7 +14,6 @@ exports.editInfoCompany = async (req, res) => {
   const company = req.company.id
   const payload = req.body.data
   const properties = Object.values(req.query)
-  console.log(req.query)
   try {
     const infoCompany = await InfoCompanies.findOne({ company })
     //company
@@ -49,7 +48,11 @@ exports.deleteCategory = async (req, res) => {
       (i) => i !== category
     )
     //deleteCategoriesAtproducts
-    await Products.updateMany({ company, category }, { category: undefined })
+    const products = await Products.updateMany(
+      { company, category },
+      { category: 'undefined' }
+    )
+    console.log(products)
     await infoCompany.save()
     res.send('deleted')
   } catch (error) {
