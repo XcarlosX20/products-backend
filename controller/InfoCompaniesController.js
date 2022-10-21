@@ -28,6 +28,18 @@ exports.editInfoCompany = async (req, res) => {
     console.log(error)
   }
 }
+exports.addCategory = async (req, res) => {
+  const company = req.company.id
+  const { category } = req.body
+  try {
+    const infoCompany = await InfoCompanies.findOne({ company })
+    infoCompany.categories = [...infoCompany.categories, category.toLowerCase()]
+    await infoCompany.save()
+    res.status(200).json({ msg: 'added', category })
+  } catch (error) {
+    console.log(error)
+  }
+}
 exports.deleteCategory = async (req, res) => {
   const company = req.company.id
   const { category } = req.params
@@ -43,6 +55,7 @@ exports.deleteCategory = async (req, res) => {
       await i.save()
     })
     await infoCompany.save()
+    res.send('deleted')
   } catch (error) {
     console.log(error)
   }
