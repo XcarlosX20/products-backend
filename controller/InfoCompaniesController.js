@@ -49,11 +49,10 @@ exports.deleteCategory = async (req, res) => {
       (i) => i !== category
     )
     //deleteCategoriesAtproducts
-    const products = await Products.find({ company, category })
-    await products.forEach((i) => {
-      i.category = 'undefined'
-      i.save()
-    })
+    await Products.updateMany(
+      { company, category },
+      { $set: { category: undefined } }
+    )
     await infoCompany.save()
     res.send('deleted')
   } catch (error) {
