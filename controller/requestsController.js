@@ -11,19 +11,6 @@ exports.getRequest = async (req, res) => {
     console.log(error)
   }
 }
-exports.addRequest = async (req, res) => {
-  try {
-    const company = await Companies.findById(req.params.idCompany)
-    const request = req.body
-    request.company = company._id
-    request.state = false
-    const newOrder = new Requests(request)
-    await newOrder.save()
-    res.send('send')
-  } catch (error) {
-    console.log(error)
-  }
-}
 exports.editRequest = async (req, res) => {
   //const request = await Requests.findById(req.params.id);
   const { id } = req.params
@@ -42,6 +29,29 @@ exports.getRequestInDays = async (req, res) => {
     }
     const requestLastMonth = filterByMonthAgo()
     res.status(200).json({ requestLastMonth })
+  } catch (error) {
+    console.log(error)
+  }
+}
+//Ecommerce
+exports.addRequest = async (req, res, next) => {
+  try {
+    const company = await Companies.findById(req.params.idCompany)
+    const request = req.body
+    request.company = company._id
+    request.state = false
+    const newOrder = new Requests(request)
+    await newOrder.save()
+    req.newNotification = {
+      company: company._id,
+      body: request.dataBuyer,
+      type: 'requests',
+      sendEmail: company.companyEmail,
+      date: request.date,
+      idDoc: newOrder._id,
+    }
+    res.send('send')
+    next()
   } catch (error) {
     console.log(error)
   }
