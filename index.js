@@ -6,10 +6,10 @@ const connectDB = require('./config/db')
 const nodemailer = require('nodemailer')
 if (process.env.NODE_ENV !== 'production') {
   var delay = require('express-delay')
-
   app.use(delay(500, 2000))
 }
 connectDB()
+const socket = require('./socket/')
 const corsOptions = {
   origin: '*',
   credentials: true, //access-control-allow-credentials:true
