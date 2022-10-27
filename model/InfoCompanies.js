@@ -40,6 +40,10 @@ const CompaniesSchema = mongoose.Schema(
         socialMedia: Object,
       },
     ],
+    alertNotification: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false }
 )
