@@ -6,14 +6,11 @@ const socketIo = require('socket.io')
 const { editNotification } = require('./utils/NotificationsSocket')
 const io = socketIo(server, {
   cors: {
-    origin:
-      process.env.NODE_ENV === 'production'
-        ? process.env.CLIENT_URL
-        : 'http://localhost:3000',
-    methods: ['websocket'],
+    origin: '*',
   },
+  allowEIO3: true,
 })
-app.get('/', (req, res) => response.send('Hello Socket!'))
+app.get('/', (req, res) => res.send('Hello Socket!'))
 const PORT = process.env.SOCKET_PORT || 4001
 io.on('connection', (socket) => {
   socket.on(`notification:edit`, async (notification, cb) => {
