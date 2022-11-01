@@ -35,10 +35,10 @@ exports.authCompany = async (req, res) => {
 }
 exports.getCompany = async (req, res) => {
   try {
-    const user = await Companies.findById(req.company.id).select('-password');
-    res.status(200).json(user);
-} catch (error) {
-    console.log(error);
-    res.status(500).json({msg: 'There was an error'});
-}
+    const user = await Companies.findById(req.company.id).select('-password')
+    res.status(200).json(user)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ msg: 'There was an error' })
+  }
 }

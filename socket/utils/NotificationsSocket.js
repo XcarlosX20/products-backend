@@ -1,4 +1,4 @@
-const Notifications = require('../../model/notifications')
+const Notifications = require('../../model/Notifications')
 exports.editNotification = async ({ notification, changes }) => {
   // pasar el id de cada company
   let edit

@@ -1,5 +1,5 @@
 const socket = require('../socket')
-const Notifications = require('../model/notifications')
+const Notifications = require('../model/Notifications')
 const InfoCompanies = require('../model/InfoCompanies')
 exports.newNotification = async (req, res) => {
   // pasar el id de cada company
@@ -21,10 +21,16 @@ exports.getNotifications = async (req, res) => {
   // pasar el id de cada company
   const company = req.company.id
   try {
-    const notifications = Notifications.find({ company })
-      .sort({ date: -1 })
-      .limit(20)
-    res.status(200).json(notifications)
+    await InfoCompanies.findOneAndUpdate(
+      { company },
+      { alertNotification: false }
+    )
+    const notifications = await Notifications.find({ company })
+      .sort({ date: 1 })
+      .limit(30)
+
+    //console.log(notifications)
+    res.json(notifications)
   } catch (error) {
     console.log(error)
   }

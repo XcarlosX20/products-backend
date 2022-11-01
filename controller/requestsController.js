@@ -5,7 +5,7 @@ const Requests = require('../model/Requests')
 exports.getRequest = async (req, res) => {
   const company = req.company.id
   try {
-    const orders = await Requests.find({ company }).sort({ state: 1, date: -1 })
+    const orders = await Requests.find({ company }).sort({ state: 1, date: 1 })
     res.status(200).json(orders)
   } catch (error) {
     console.log(error)
@@ -22,7 +22,7 @@ exports.getRequestInDays = async (req, res) => {
   const { daysRange } = req.params
   try {
     const { dateRef } = await Companies.findById(company)
-    const requests = await Requests.find({ company }).sort({ date: -1 })
+    const requests = await Requests.find({ company }).sort({ date: 1 })
     const timeLimit = getDateRange({ dateRef, days: daysRange })
     const filterByMonthAgo = () => {
       return requests.filter((results) => results.date >= timeLimit)
