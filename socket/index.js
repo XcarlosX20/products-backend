@@ -13,6 +13,7 @@ const io = socketIo(server, {
     methods: ['websocket'],
   },
 })
+app.get('/', (req, res) => response.send('Hello Socket!'))
 const PORT = process.env.SOCKET_PORT || 4001
 io.on('connection', (socket) => {
   socket.on(`notification:edit`, async (notification, cb) => {
