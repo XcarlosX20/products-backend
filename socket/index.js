@@ -4,12 +4,13 @@ const http = require('http')
 const server = http.createServer(app)
 const socketIo = require('socket.io')
 const { editNotification } = require('./utils/NotificationsSocket')
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+}
 const io = socketIo(server, {
-  cors: {
-    origin: 'https://dastore.vercel.app/',
-    optionSuccessStatus: 200,
-  },
-  credentials: true,
+  cors: corsOptions,
 })
 app.get('/', (req, res) => res.send('Hello Socket!'))
 const { SOCKET_PORT = 0 } = process.env
