@@ -1,4 +1,3 @@
-const socket = require('../socket')
 const Notifications = require('../model/Notifications')
 const InfoCompanies = require('../model/InfoCompanies')
 exports.newNotification = async (req, res) => {
@@ -8,6 +7,7 @@ exports.newNotification = async (req, res) => {
       ...req.newNotification,
       readed: false,
     })
+    const socket = require('../socket')
     socket.emit(`notifications:${newNotification.company}`, newNotification)
     await newNotification.save()
     await InfoCompanies.findOneAndUpdate(

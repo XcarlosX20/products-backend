@@ -6,19 +6,20 @@ const socketIo = require('socket.io')
 const { editNotification } = require('./utils/NotificationsSocket')
 const io = socketIo(server, {
   cors: {
-    origin: '*',
+    origin: 'https://dastore.vercel.app/',
+    optionSuccessStatus: 200,
   },
-  allowEIO3: true,
+  credentials: true,
 })
 app.get('/', (req, res) => res.send('Hello Socket!'))
-const PORT = process.env.SOCKET_PORT || 4001
+const { SOCKET_PORT = 0 } = process.env
 io.on('connection', (socket) => {
   socket.on(`notification:edit`, async (notification, cb) => {
     let edited = await editNotification({ notification })
     cb(edited)
   })
 })
-server.listen(PORT, () => {
-  console.log(`socket on port ${PORT}`)
+server.listen(SOCKET_PORT, () => {
+  console.log(`socket on port ${server.address().port}`)
 })
 module.exports = io
