@@ -29,8 +29,8 @@ const CompaniesSchema = mongoose.Schema(
       require: true,
     },
     workTime: {
-      type: [String],
-      default: ['08:00', '21:00'],
+      type: Object,
+      default: { startTime: '8:00', endTime: '21:00' },
       require: true,
     },
     employees: [
@@ -40,6 +40,10 @@ const CompaniesSchema = mongoose.Schema(
         socialMedia: Object,
       },
     ],
+    location: {
+      type: Object,
+      require: false,
+    },
     alertNotification: {
       type: Boolean,
       default: false,

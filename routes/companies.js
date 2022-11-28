@@ -7,7 +7,7 @@ const auth = require('../middleware/auth')
 router.post('/', companiesController.addCompany)
 //router.post('/info', auth, InfoCompaniesController.addInfoCompany)
 router.get('/notifications/', auth, getNotifications)
-router.put('/info/', auth, InfoCompaniesController.editInfoCompany)
+router.put('/info', auth, InfoCompaniesController.editInfoCompany)
 router.get('/info', auth, InfoCompaniesController.getInfoCompany)
 router.post('/info/categories/', auth, InfoCompaniesController.addCategory)
 router.delete(

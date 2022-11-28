@@ -5,6 +5,9 @@ exports.getInfoCompany = async (req, res) => {
   const company = req.company.id
   try {
     const infoCompany = await InfoCompanies.findOne({ company })
+    if (!infoCompany) {
+      return res.status(404).json({ msg: 'not found' })
+    }
     res.status(200).json(infoCompany)
   } catch (error) {
     console.log(error)

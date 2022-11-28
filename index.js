@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-require('dotenv').config({ path: '.env' })
 const connectDB = require('./config/db')
 const nodemailer = require('nodemailer')
 if (process.env.NODE_ENV !== 'production') {

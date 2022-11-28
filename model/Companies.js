@@ -24,6 +24,12 @@ const CompaniesSchema = mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    tokenResetPass: {
+      type: String,
+    },
+    tokenExp: {
+      type: Date,
+    },
   },
   { versionKey: false }
 )
