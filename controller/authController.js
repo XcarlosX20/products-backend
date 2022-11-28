@@ -1,5 +1,6 @@
 const Companies = require('../model/Companies')
 const bcrypt = require('bcrypt')
+const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { checkToken } = require('../middleware/resetPassword')
 const { FRONTEND_URL } = require('../config/variables')
@@ -57,7 +58,28 @@ exports.sendToken = async (req, res) => {
     expiresIn: 3600,
   })
   company.tokenResetPass = token
-  console.log(`${FRONTEND_URL}/reset-password/${token}`)
+  const link = `${FRONTEND_URL}/reset-password/${token}`
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'carlossierra850@gmail.com',
+      pass: 'carlos850',
+    },
+  })
+  let mailOptions = {
+    // should be replaced with real recipient's account
+    to: 'ramonsierra2009@hotmail.com',
+    subject: 'Token reset password',
+    text: `click here to set your new password: ${link}`,
+  }
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error)
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response)
+  })
   company.save()
   return res.status(200).json({
     msg: `Enter your email address to send a password reset link ${company.companyEmail}`,
