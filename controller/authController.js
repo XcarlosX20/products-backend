@@ -60,28 +60,9 @@ exports.sendToken = async (req, res) => {
   company.tokenResetPass = token
   const link = `${FRONTEND_URL}/reset-password/${token}`
   console.log(link)
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'carlossierra850@gmail.com',
-      pass: 'carlos850',
-    },
-  })
-  let mailOptions = {
-    to: 'carlosroyal708@gmail.com',
-    subject: 'link reset password',
-    text: link,
-  }
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error)
-    }
-  })
   company.save()
   res.status(200).json({
-    msg: `The message has been sent to ${company.companyEmail}`,
+    msg: `Enter your email address to send a password reset link ${company.companyEmail}`,
     type: 'success',
   })
 }
