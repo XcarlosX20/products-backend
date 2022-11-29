@@ -59,6 +59,7 @@ exports.sendToken = async (req, res) => {
   })
   company.tokenResetPass = token
   const link = `${FRONTEND_URL}/reset-password/${token}`
+  console.log(link)
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -70,7 +71,7 @@ exports.sendToken = async (req, res) => {
   })
   let mailOptions = {
     // should be replaced with real recipient's account
-    to: 'ramonsierra2009@hotmail.com',
+    to: 'carlosroyal708@gmail.com',
     subject: 'Token reset password',
     text: `click here to set your new password: ${link}`,
   }
