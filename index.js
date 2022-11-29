@@ -2,7 +2,6 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const connectDB = require('./config/db')
-//const nodemailer = require('nodemailer')
 if (process.env.NODE_ENV !== 'production') {
   var delay = require('express-delay')
   app.use(delay(500, 2000))
