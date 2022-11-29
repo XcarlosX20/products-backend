@@ -1,6 +1,6 @@
 const Companies = require('../model/Companies')
 const bcrypt = require('bcrypt')
-//const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { checkToken } = require('../middleware/resetPassword')
 const { FRONTEND_URL } = require('../config/variables')
