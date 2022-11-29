@@ -57,9 +57,10 @@ exports.sendToken = async (req, res) => {
     expiresIn: 3600,
   })
   company.tokenResetPass = token
-  console.log(`${FRONTEND_URL}/reset-password/${token}`)
+  const link = `${FRONTEND_URL}/reset-password/${token}`
+  console.log(link)
   company.save()
-  return res.status(200).json({
+  res.status(200).json({
     msg: `Enter your email address to send a password reset link ${company.companyEmail}`,
     type: 'success',
   })
