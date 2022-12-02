@@ -7,8 +7,7 @@ const CompaniesSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      require: true,
-      default: '',
+      require: false,
     },
     categories: {
       type: [String],
@@ -37,11 +36,13 @@ const CompaniesSchema = mongoose.Schema(
       {
         name: String,
         role: String,
+        img: String,
         socialMedia: Object,
       },
     ],
     location: {
       type: Object,
+      default: { lat: 51.505, lng: -0.09, zoom: 4 },
       require: false,
     },
     alertNotification: {

@@ -60,6 +60,27 @@ exports.sendToken = async (req, res) => {
   company.tokenResetPass = token
   const link = `${FRONTEND_URL}/reset-password/${token}`
   console.log(link)
+<<<<<<< HEAD
+=======
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.mailtrap.io',
+    port: 2525,
+    auth: {
+      user: 'ab5e933230df58',
+      pass: 'cc1ba8bccbc882',
+    },
+  })
+  let mailOptions = {
+    to: 'carlosroyal708@gmail.com',
+    subject: 'link reset password',
+    html: `<a href=${link}>click here to reset your password</a>`,
+  }
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error)
+    }
+  })
+>>>>>>> mail
   company.save()
   res.status(200).json({
     msg: `Enter your email address to send a password reset link ${company.companyEmail}`,
