@@ -47,45 +47,50 @@ exports.getCompany = async (req, res) => {
 }
 //Reset password
 exports.sendToken = async (req, res) => {
-  const company = await Companies.findOne({ companyEmail: req.body.email })
-  if (!company) {
-    return res.status(400).json({
-      msg: `This account does not exist`,
-      type: 'error',
-    })
-  }
-  const token = jwt.sign({ email: company.companyEmail }, process.env.SECRET, {
-    expiresIn: 3600,
-  })
-  company.tokenResetPass = token
-  const link = `${FRONTEND_URL}/reset-password/${token}`
-  console.log(link)
-<<<<<<< HEAD
-=======
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
-    auth: {
-      user: 'ab5e933230df58',
-      pass: 'cc1ba8bccbc882',
-    },
-  })
-  let mailOptions = {
-    to: 'carlosroyal708@gmail.com',
-    subject: 'link reset password',
-    html: `<a href=${link}>click here to reset your password</a>`,
-  }
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error)
+  try {
+    const company = await Companies.findOne({ companyEmail: req.body.email })
+    if (!company) {
+      return res.status(400).json({
+        msg: `This account does not exist`,
+        type: 'error',
+      })
     }
-  })
->>>>>>> mail
-  company.save()
-  res.status(200).json({
-    msg: `Enter your email address to send a password reset link ${company.companyEmail}`,
-    type: 'success',
-  })
+    const token = jwt.sign(
+      { email: company.companyEmail },
+      process.env.SECRET,
+      {
+        expiresIn: 3600,
+      }
+    )
+    company.tokenResetPass = token
+    const link = `${FRONTEND_URL}/reset-password/${token}`
+    console.log(link)
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.mailtrap.io',
+      port: 2525,
+      auth: {
+        user: 'ab5e933230df58',
+        pass: 'cc1ba8bccbc882',
+      },
+    })
+    let mailOptions = {
+      to: 'carlosroyal708@gmail.com',
+      subject: 'link reset password',
+      html: `<a href=${link}>click here to reset your password</a>`,
+    }
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error)
+      }
+    })
+    company.save()
+    res.status(200).json({
+      msg: `Enter your email address to send a password reset link ${company.companyEmail}`,
+      type: 'success',
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 exports.checkToken = async (req, res) => {
   const token = req.params.token
