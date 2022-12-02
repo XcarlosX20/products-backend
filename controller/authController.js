@@ -1,6 +1,6 @@
 const Companies = require('../model/Companies')
 const bcrypt = require('bcrypt')
-//const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const { checkToken } = require('../middleware/resetPassword')
 const { FRONTEND_URL } = require('../config/variables')
@@ -61,18 +61,17 @@ exports.sendToken = async (req, res) => {
   const link = `${FRONTEND_URL}/reset-password/${token}`
   console.log(link)
   let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    host: 'smtp.mailtrap.io',
+    port: 2525,
     auth: {
-      user: 'carlossierra850@gmail.com',
-      pass: 'carlos850',
+      user: 'ab5e933230df58',
+      pass: 'cc1ba8bccbc882',
     },
   })
   let mailOptions = {
     to: 'carlosroyal708@gmail.com',
     subject: 'link reset password',
-    text: link,
+    html: `<a href=${link}>click here to reset your password</a>`,
   }
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
