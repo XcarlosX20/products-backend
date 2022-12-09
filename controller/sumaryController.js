@@ -5,12 +5,12 @@ const Requests = require('../model/Requests')
 const Summaries = require('../model/Summaries')
 exports.getSumaryCompany = async (req, res) => {
   const company = req.company.id
-  const { daysRange } = req.query
   try {
     const { dateRef } = await Companies.findById(company)
     const startDate = moment(dateRef).subtract(1, 'month')
     const requests = await Requests.find({
       company: company,
+      paid: true,
       date: { $gte: startDate, $lte: dateRef },
     })
     const earnings = calculeRevenues({ arr: requests })

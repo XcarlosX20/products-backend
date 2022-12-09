@@ -31,9 +31,17 @@ const RequestsSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    pendingDelete: {
+    error: {
       type: Boolean,
       require: false,
+    },
+    typeError: {
+      type: Object,
+      require: false,
+    },
+    paid: {
+      type: Boolean,
+      default: false,
     },
     date: {
       type: Date,
