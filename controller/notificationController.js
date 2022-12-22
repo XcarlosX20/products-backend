@@ -7,7 +7,7 @@ exports.newNotification = async (req, res) => {
       ...req.newNotification,
       readed: false,
     })
-    const socket = require('../socket')
+    const { socket } = require('../index')
     socket.emit(`notifications:${newNotification.company}`, newNotification)
     await newNotification.save()
     await InfoCompanies.findOneAndUpdate(
