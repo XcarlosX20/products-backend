@@ -50,8 +50,8 @@ exports.addRequest = async (req, res, next) => {
       sendEmail: company.companyEmail,
       date: request.date,
       idDoc: newOrder._id,
+      paid: request.paid,
     }
-    res.send('send')
     next()
   } catch (error) {
     console.log(error)

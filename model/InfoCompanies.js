@@ -45,6 +45,7 @@ const CompaniesSchema = mongoose.Schema(
       default: { lat: 51.505, lng: -0.09, zoom: 4 },
       require: false,
     },
+    payMethods: Array,
     alertNotification: {
       type: Boolean,
       default: false,
