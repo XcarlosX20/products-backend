@@ -7,7 +7,7 @@ const conectarDB = async () => {
         ? process.env.DB_URL
         : process.env.DB_LOCAL
     )
-    console.log('DB connected')
+    console.log('DB connected', process.env.DB_URL,  process.env.NODE_ENV)
   } catch (error) {
     console.log(error)
   }
