@@ -9,7 +9,7 @@ exports.authCompany = async (req, res) => {
   try {
     let company = await Companies.findOne({ companyEmail })
     if (!company) {
-      return res.status(400).json({ msg: 'This user does not exist' })
+      return res.status(404).json({ msg: 'This user does not exist' })
     }
     const passCorrect = await bcrypt.compare(password, company.password)
     if (!passCorrect) {
